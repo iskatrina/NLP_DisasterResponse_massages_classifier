@@ -20,8 +20,8 @@ The project is divided into three components:
 This provides an overall view of the project structure :
 
 app
-| - template
-| |- master.html # main page of web app
+<br> | - template
+<br> | |- master.html # main page of web app
 | |- go.html # classification result page of web app
 |- run.py # Flask file that runs app
 data
