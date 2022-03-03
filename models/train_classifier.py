@@ -73,9 +73,12 @@ def tokenize(text):
 
 def build_model():
     '''
-    creates model pipeline - vectorize , then applies tfidf transformer and then using ADABoostClassifier for
+    - builds a pipeline that processes text and then performs multi-output classification on the 36 categories in the dataset.
+    -  GridSearchCV is used to find the best parameters for the model.
+    - pipeline - vectorize , then applies tfidf transformer and then using ADABoostClassifier for
     multioutcome prediction
-    :return:
+     
+    :return: model
     '''
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -85,7 +88,14 @@ def build_model():
            n_estimators=80)))
     ])
 
-    return pipeline
+    parameters = {
+                'clf__estimator__n_estimators': [50, 80],
+                'clf__estimator__learning_rate': [0.01, 0.1, 0.5]
+            }
+
+    cv = GridSearchCV(estimator=pipeline, param_grid=parameters, cv=2, n_jobs=1, verbose=2, return_train_score=False)
+
+    return cv
 
 
 def evaluate_model(model, X_test, y_test, categories):
