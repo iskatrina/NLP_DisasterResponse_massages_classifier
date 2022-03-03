@@ -19,7 +19,7 @@ The project is divided into three components:
 ### Structure of project files
 This provides an overall view of the project structure :
 
-app
+*app*
 <br> | - template
 <br> | |- master.html # main page of web app
 <br> | |- go.html # classification result page of web app
